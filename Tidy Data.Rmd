@@ -1,0 +1,106 @@
+---
+title: "Data Cleaning Steps"
+author: "Syafeeq Alias"
+date: "12/14/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+We will read the CSV file we get from MOF website and transform & clean it to tidy data.
+
+First we will clean up the Federal Government Revenue Data
+
+```{r}
+library(tidyr)
+
+#Federal Government Revenue Data
+FedGovRev19702017DF <- read.csv("Fed Gov Revenue 1970-2017.csv")
+
+#check the data file
+names(FedGovRev19702017DF)
+dim(FedGovRev19702017DF)
+head(FedGovRev19702017DF)
+
+#initial data frame was Entry, Year 1, Year 2, ..., Year N
+#tidy up the data file so it goes to the right structure, i.e. Entry, Year, Value
+Tidy_FedGovRev19702017DF <- gather(FedGovRev19702017DF, "Year", "Value", 3:49)
+head(Tidy_FedGovRev19702017DF)
+```
+
+The data cleaning steps consists of the following steps
+
+1. Remove X from the Year column
+2. Substitute '-' with 0
+3. Change the Year column to factor
+4. Change the Value column to numeric
+5. Change NA Value to 0
+
+Once cleaned, we save the data frame to anoter CSV file for use
+
+```{r}
+Tidy_FedGovRev19702017DF$Year <- gsub('X','',Tidy_FedGovRev19702017DF$Year)
+Tidy_FedGovRev19702017DF$Value <- gsub('-','0',Tidy_FedGovRev19702017DF$Value)
+Tidy_FedGovRev19702017DF <- transform(Tidy_FedGovRev19702017DF, Year = as.factor(Year))
+Tidy_FedGovRev19702017DF <- transform(Tidy_FedGovRev19702017DF, Value = as.numeric(Value))
+Tidy_FedGovRev19702017DF$Value[is.na(Tidy_FedGovRev19702017DF$Value)] <- 0
+
+#check data is now in right format
+head(Tidy_FedGovRev19702017DF)
+sapply(Tidy_FedGovRev19702017DF, class)
+
+#write the tidy data to a csv file
+write.csv(Tidy_FedGovRev19702017DF, "Tidy_FedGovRev.csv", row.names = FALSE)
+```
+
+We will do the same data cleaning steps for the data file for Federal Government Development Expenditure
+
+```{r}
+#Federal Government Development Expenditure Data
+FedGovDevex19702017DF <- read.csv("Fed Gov Devex 1970-2017.csv")
+head(FedGovDevex19702017DF)
+
+Tidy_FedGovDevex <- gather(FedGovDevex19702017DF, "Year", "Value", 3:50)
+head(Tidy_FedGovDevex)
+
+Tidy_FedGovDevex$Year <- gsub('X','',Tidy_FedGovDevex$Year)
+Tidy_FedGovDevex$Value <- gsub('-','0',Tidy_FedGovDevex$Value)
+Tidy_FedGovDevex <- transform(Tidy_FedGovDevex, Year = as.factor(Year))
+Tidy_FedGovDevex <- transform(Tidy_FedGovDevex, Value = as.numeric(Value))
+Tidy_FedGovDevex$Value[is.na(Tidy_FedGovDevex$Value)] <- 0
+
+#check data is now in right format
+head(Tidy_FedGovDevex)
+sapply(Tidy_FedGovDevex, class)
+
+#write the tidy data to a csv file
+write.csv(Tidy_FedGovDevex, "Tidy_FedGovDevex.csv", row.names = FALSE)
+
+```
+
+Repeat data cleaning steps for Federal Government Opex
+
+```{r}
+#Federal Government Opeerating Expenditure Data
+FedGovOpex19702017DF <- read.csv("Fed Gov Opex 1970-2017.csv")
+head(FedGovOpex19702017DF)
+
+Tidy_FedGovOpex <- gather(FedGovOpex19702017DF, "Year", "Value", 3:50)
+head(Tidy_FedGovOpex)
+
+Tidy_FedGovOpex$Year <- gsub('X','',Tidy_FedGovOpex$Year)
+Tidy_FedGovOpex$Value <- gsub('-','0',Tidy_FedGovOpex$Value)
+Tidy_FedGovOpex <- transform(Tidy_FedGovOpex, Year = as.factor(Year))
+Tidy_FedGovOpex <- transform(Tidy_FedGovOpex, Value = as.numeric(Value))
+Tidy_FedGovOpex$Value[is.na(Tidy_FedGovOpex$Value)] <- 0
+
+#check data is now in right format
+head(Tidy_FedGovOpex)
+sapply(Tidy_FedGovOpex, class)
+
+#write the tidy data to a csv file
+write.csv(Tidy_FedGovOpex, "Tidy_FedGovOpex.csv", row.names = FALSE)
+
+```

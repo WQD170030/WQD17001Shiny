@@ -1,0 +1,512 @@
+filter(gear > 3) %>%
+arrange(desc(cyl))
+Q18tbl
+Q18tbl <-mtcars %>% #take mtcars
+select(mpg:gear, -drat) %>% #select column mpg to gear, except for drat
+filter(gear > 3) %>% #filter for cars where gear>3
+arrange(desc(cyl)) #arrange the results in descending cyl count
+Q18tbl
+by_cyl <- mtcars %>% group_by(cyl)
+by_cyl
+summarise(by_cyl, disp=mean(disp), hp=mean(hp))
+hen summarise to find the maximum miles per gallon.
+Q19tbl <- mtcars %>%
+filter(gear>3, cyl>=6) %>%
+group_by(cyl) %>%
+summarise(max(mpg))
+Q19tbl
+your code using  pipe operator
+Q20tbl <- mtcars %>%
+filter(gear>3, cyl>=6) %>%
+arrange(cyl, desc(mpg))
+Q20tbl
+library(dplyr)
+#1.	Load mtcars into your R environment and look at the data and the way data is displayed on yr console.
+mtcars
+#2.	Then convert mtcars data frame into mtcars tbl by > mtcars<-tbl(mtcars)
+#3.	Compare the two displays.
+mtcars <- tbl_df(mtcars)
+mtcars
+#4.	You can also > glimpse(mtcars)  - compare the displayed data.
+glimpse(mtcars)
+Q5tbl <- select(mtcars, mpg:wt, -hp)
+Q5tbl
+Q6tbl <- select(mtcars, starts_with("c"))
+Q6tbl
+View(Q6tbl)
+View(Q5tbl)
+view(Q6tbl)
+View(Q6tbl)
+Q7tbl <- select(mtcars, starts_with("c"), ends_with("t"))
+Q7tbl
+#8.	Then use the basic R code to achieve the same result.
+Q8tbl <- mtcars[c("cyl", "carb", "drat", "wt")]
+Q8tbl
+View(Q8tbl)
+View(Q7tbl)
+View(Q8tbl)
+g1 <- mutate(mtcars, hpp=hp/100)
+head(g1)
+Q10tbl <- filter(mtcars, cyl==8 & qsec>16)
+Q10tbl
+View(Q10tbl)
+#11.	Extract from mtcars those with cyl 6 or 8 and qseq greater than 16
+Q11tbl <- filter(mtcars, (cyl==8|cyl==6) & qsec>16)
+Q11tbl
+#12.	Arrange mtcars by cyl and mpg
+Q12tbl <- arrange(mtcars, cyl, mpg)
+Q12tbl
+Q13tbl <- arrange(mtcars, cyl, desc(mpg))
+Q13tbl
+d1<-select(mtcars, mpg:gear, - drat)
+d2<-filter(d1, gear>3)
+d3<-arrange(d2, desc(cyl))
+d3
+Q14tbl <- arrange(filter(select(mtcars, mpg:gear, - drat), gear>3), desc(cyl))
+Q14tbl
+#15.	Among all cars in mtcars, find the average, the maximum, and the minimum mpg
+Q15tbl <- summarise(mtcars, avgmpg = mean(mpg), maxmpg = max(mpg), minmpg = min(mpg))
+Q15tbl
+Q16tbl <- summarise(filter(mtcars, cyl == 8), avgmpg = mean(mpg), maxmpg = max(mpg), minmpg = min(mpg))
+Q16tbl
+Q17tbl <- arrange(filter(mtcars, cyl == 8), mpg)
+head(Q17tbl)
+tail(Q17tbl)
+Q18tbl <-mtcars %>% #take mtcars
+select(mpg:gear, -drat) %>% #select column mpg to gear, except for drat
+filter(gear > 3) %>% #filter for cars where gear>3
+arrange(desc(cyl)) #arrange the results in descending cyl count
+Q18tbl
+Q19tbl <- mtcars %>%
+filter(gear>3, cyl>=6) %>%
+group_by(cyl) %>%
+summarise(max(mpg))
+Q19tbl
+Q20tbl <- mtcars %>%
+filter(gear>3, cyl>=6) %>%
+arrange(cyl, desc(mpg))
+Q20tbl
+View(Q20tbl)
+testDF <- data.frame(replicate(10,sample(0:1,1000,rep=TRUE)))
+head(testDF)
+testDF <- data.frame(replicate(3,sample(0:1,1000,rep=TRUE)))
+head(testDF)
+testDF <- data.frame(replicate(3,sample(0:9,1000,rep=TRUE)))
+head(testDF)
+?replicate
+testDF <- data.frame(replicate(3,sample(0:99,1000,rep=TRUE)))
+head(testDF)
+testDF <- data.frame(replicate(3,sample(0:99,1000000,rep=TRUE)))
+head(testDF)
+summary(testDF)
+testDF <- data.frame(replicate(3,sample(0:99,1000000,rep=TRUE)))
+head(testDF)
+summary(testDF)
+str(testDF)
+myRow = 1000
+myCol = 3
+myUpperLimit = 99
+testDF <- data.frame(replicate(myCol,sample(0:myUpperLimit,myRow,rep=TRUE)))
+head(testDF)
+summary(testDF)
+str(testDF)
+head(testDF)
+str(testDF)
+?svd
+head(testDF)
+str(testDF)
+?kmeans
+myRow = 1000
+myCol = 3
+myMax = 99
+j = 2
+epsilon = 0.1
+#Create a dataframe with random values of 0 to 99, myRow columns x myCol  rows
+testDF <- data.frame(replicate(myCol,sample(0:myMax,myRow,rep=TRUE)))
+head(testDF)
+str(testDF)
+m = j + ceiling(j/epsilon) - 1
+?svd
+myCoreSet <- svd(testDF, m)
+myCoreSet
+myRow = 100
+myCol = 3
+myMax = 9
+j = 2
+epsilon = 0.1
+#Create a dataframe with random values of 0 to 99, myRow columns x myCol  rows
+testDF <- data.frame(replicate(myCol,sample(0:myMax,myRow,rep=TRUE)))
+head(testDF)
+str(testDF)
+m = j + ceiling(j/epsilon) - 1
+myCoreSet <- svd(testDF, m)
+myCoreSet
+myCoreSet[0]
+myCoreSet[1]
+myCoreSet[2]
+myCoreSet[1]
+[1]
+myCoreSet[0]
+myCoreSet[1]
+myCoreSet[2]
+myCoreSet[0]
+myCoreSet[1]
+myCoreSet[2]
+myCoreSet[3]
+D <- myCoreSet[1] #D
+U <- myCoreSet[2] #U
+V <- myCoreSet[3] #V
+D
+V
+D*V
+U
+length(U)
+str(U)
+myCoreSet[1]
+myCoreSet[2]
+myCoreSet[v]
+myCoreSet[3]
+myRow = 10
+myCol = 3
+myMax = 9
+j = 2
+epsilon = 0.1
+#Create a dataframe with random values of 0 to 99, myRow columns x myCol  rows
+testDF <- data.frame(replicate(myCol,sample(0:myMax,myRow,rep=TRUE)))
+head(testDF)
+str(testDF)
+m = j + ceiling(j/epsilon) - 1
+myCoreSet <- svd(testDF, m)
+D <- myCoreSet[1] #D
+U <- myCoreSet[2] #U
+V <- myCoreSet[3] #V
+D
+U
+V
+D
+V
+U
+V''
+V^-1
+V
+C <- tcrossprod(D,V)
+?as.matrix
+D <- as.matrix(mySVD[1]) #D
+U <- as.matrix(mySVD[2]) #U
+V <- as.matrix(mySVD[3]) #V
+mySVD <- svd(testDF, m)
+D <- as.matrix(mySVD[1]) #D
+U <- as.matrix(mySVD[2]) #U
+V <- as.matrix(mySVD[3]) #V
+class(D)
+C <- tcrossprod(D,V)
+D
+V
+U
+mySVD <- svd(testDF, m)
+D <- mySVD[1] #D
+U <- mySVD[2] #U
+V <- mySVD[3] #V
+D
+U
+V
+D
+V
+D %*% t(V)
+U %*% t(V)
+t(V)
+D
+V
+U
+t(V)
+t(D)
+?t
+D
+V
+#Implement the Clustering Algorithm of the research article titled "Turning Big data into tiny data: Constant-size coresets for k-means, PCA and projective clustering"
+#Your implementation will have two parts. First part will be non-distributed version as implemented in the article (This is essentially standard K-means and you can use that as well).
+#Second part will be distributed version using Map-Reduce.
+#variables
+myRow = 100000
+myCol = 3
+myMax = 99
+myCluster = 3
+#Create a dataframe with random values of 0 to 99, myRow columns x myCol  rows
+testDF <- data.frame(replicate(myCol,sample(0:myMax,myRow,rep=TRUE)))
+head(testDF)
+str(testDF)
+# Perform K-Means with 2 clusters
+set.seed(7)
+km1 = kmeans(testDF, myCluster, nstart=100)
+km1
+# Plot results
+myPlotTitle = paste("K-Means result with", myCluster, "clusters","and ",myRow,"points" )
+plot(testDF, col =(km1$cluster +1) , main=myPlotTitle, pch=20, cex=2)
+km1$withinss
+myRow = 10000
+#Implement the Clustering Algorithm of the research article titled "Turning Big data into tiny data: Constant-size coresets for k-means, PCA and projective clustering"
+#Your implementation will have two parts. First part will be non-distributed version as implemented in the article (This is essentially standard K-means and you can use that as well).
+#Second part will be distributed version using Map-Reduce.
+#variables
+myRow = 10000
+myCol = 3
+myMax = 99
+myCluster = 3
+#Create a dataframe with random values of 0 to myMax, rows = myRow x columns = myCol
+testDF <- data.frame(replicate(myCol,sample(0:myMax,myRow,rep=TRUE)))
+head(testDF)
+str(testDF)
+# Perform K-Means with clusters = myCluster
+set.seed(7)
+km1 = kmeans(testDF, myCluster, nstart=100)
+km1
+km1$withinss
+# Plot results
+myPlotTitle = paste("K-Means result with", myCluster, "clusters","and ",myRow,"points" )
+plot(testDF, col =(km1$cluster +1) , main=myPlotTitle, pch=20, cex=2)
+#variables
+myRow = 10000
+myCol = 3
+myMax = 99
+j = 2
+epsilon = 0.1
+#Create a dataframe with random values of 0 to 99, myRow columns x myCol  rows
+testDF <- data.frame(replicate(myCol,sample(0:myMax,myRow,rep=TRUE)))
+head(testDF)
+str(testDF)
+m = j + ceiling(j/epsilon) - 1
+mySVD <- svd(testDF, m)
+D <- mySVD[1] #D
+U <- mySVD[2] #U
+V <- mySVD[3] #V
+mySVD
+C <- D*V
+C <- D %*% t(V)
+D <- mySVD[1] #D
+U <- mySVD[2] #U
+V <- mySVD[3] #V
+C <- D %*% t(V)
+type(D)
+class(D)
+as.vector(D)
+as.vector(V)
+C <- D %*% t(V)
+#Implement the Clustering Algorithm of the research article titled "Turning Big data into tiny data: Constant-size coresets for k-means, PCA and projective clustering"
+#Your implementation will have two parts. First part will be non-distributed version as implemented in the article (This is essentially standard K-means and you can use that as well).
+#Second part will be distributed version using Map-Reduce.
+#variables
+myRow = 10000
+myCol = 2
+myMax = 99
+j = 2
+epsilon = 0.1
+#Create a dataframe with random values of 0 to 99, myRow columns x myCol  rows
+testDF <- data.frame(replicate(myCol,sample(0:myMax,myRow,rep=TRUE)))
+head(testDF)
+str(testDF)
+m = j + ceiling(j/epsilon) - 1
+mySVD <- svd(testDF, m)
+D <- mySVD[1] #D
+U <- mySVD[2] #U
+V <- mySVD[3] #V
+mySVD
+C <- D %*% t(V)
+D <- as.matrix(mySVD[1]) #D
+V <- as.matrix(mySVD[3]) #V
+C <- D %*% t(V)
+C <- D %*% V
+D <- as.matrix(mySVD[1]) #D
+V <- as.matrix(mySVD[3]) #V
+D
+V
+mySVD[1]
+mySVD[3]
+V
+as.matrix(mySVD[3])
+mySVD[1] %*% mySVD[3]
+class(mySVD[3])
+x <- rbind(matrix(rnorm(100, sd = 0.3), ncol = 2),
+matrix(rnorm(100, mean = 1, sd = 0.3), ncol = 2))
+colnames(x) <- c("x", "y")
+View(x)
+View(testDF)
+#implementing normal K-Means clustering & plotting the result
+#variables
+myRow = 20000
+myCol = 2
+myMax = 99
+myCluster = 5
+#Create a dataframe with random values of 0 to myMax, rows = myRow x columns = myCol
+testDF <- data.frame(replicate(myCol,sample(0:myMax,myRow,rep=TRUE)))
+head(testDF)
+str(testDF)
+# Perform K-Means with clusters = myCluster
+#set.seed(7)
+km1 = kmeans(testDF, myCluster)
+# Plot results
+myPlotTitle = paste("K-Means result with", myCluster, "clusters","and ",myRow*myCol,"points" )
+plot(testDF, col =(km1$cluster +1) , main=myPlotTitle, pch=20, cex=2)
+library(RSpectra)
+library(matrixcalc)
+library(pracma)
+#variables
+myRow = 1000000
+myCol = 2
+myMax = 99
+j = 2
+epsilon = 0.1
+myCluster = 5
+#Create a dataframe with random values of 0 to 99, myRow rows x myCol columns
+A <- replicate(myCol,sample(0:myMax,myRow,rep=TRUE))
+str(A)
+#Getting the coreset
+m = j + ceiling(j/epsilon) - 1
+m
+mySVD <- svds(A)
+mySVD
+d <- diag(mySVD$d)
+#get the coreset
+C <- d %*% t(mySVD$v)
+C
+#Getting the coreset
+m = j + ceiling(j/epsilon) - 1
+m
+mySVD <- svd(A)
+mySVD
+d <- diag(mySVD$d)
+#get the coreset
+C <- d %*% t(mySVD$v)
+C
+dim(C)
+startTime <- Sys.time()
+km1 = kmeans(A, myCluster)
+endTime <- Sys.time()
+km1Time <- endTime - startTime
+# Perform K-Means with the coreset clusters = myCluster
+startTime <- Sys.time()
+km2 = kmeans(C, myCluster)
+endTime <- Sys.time()
+km2Time <- endTime - startTime
+km1Time
+km2Time
+# Plot results of the clustering algorithm centers
+myPlotTitle = paste("Original Data Set: K-Means clusters with", myCluster, "clusters","and ",dim(A)[1]*dim(A)[2],"points" )
+plot(km1$cluster, col =(km1$cluster +1) , main=myPlotTitle, pch=20, cex=2)
+myPlotTitle = paste("With Coreset: K-Means clusters with", myCluster, "clusters","and ",dim(C)[1]*dim(C)[2],"points" )
+plot(km2$cluster, col =(km2$cluster +1) , main=myPlotTitle, pch=20, cex=2)
+myPlotTitle = paste("Original Data Set: K-Means clusters with", myCluster, "clusters","and ",dim(A)[1]*dim(A)[2],"points" )
+plot(km1$cluster, col =(km1$cluster +1) , main=myPlotTitle, pch=20, cex=2)
+library(RSpectra)
+library(matrixcalc)
+library(pracma)
+#variables
+myRow = 100000
+myCol = 2
+myMax = 99
+j = 2
+epsilon = 0.1
+myCluster = 2
+#Create a dataframe with random values of 0 to 99, myRow rows x myCol columns
+A <- replicate(myCol,sample(0:myMax,myRow,rep=TRUE))
+str(A)
+#Getting the coreset
+m = j + ceiling(j/epsilon) - 1
+m
+mySVD <- svd(A)
+mySVD
+d <- diag(mySVD$d)
+#get the coreset
+C <- d %*% t(mySVD$v)
+dim(C)
+startTime <- Sys.time()
+km1 = kmeans(A, myCluster)
+endTime <- Sys.time()
+km1Time <- endTime - startTime
+# Perform K-Means with the coreset clusters = myCluster
+startTime <- Sys.time()
+km2 = kmeans(C, myCluster)
+endTime <- Sys.time()
+km2Time <- endTime - startTime
+km1Time
+km2Time
+myPlotTitle = paste("Original Data Set: K-Means clusters with", myCluster, "clusters","and ",dim(A)[1]*dim(A)[2],"points" )
+plot(A, col =(km1$cluster +1) , main=myPlotTitle, pch=20, cex=2)
+myPlotTitle = paste("With Coreset: K-Means clusters with", myCluster, "clusters","and ",dim(C)[1]*dim(C)[2],"points" )
+plot(C, col =(km2$cluster +1) , main=myPlotTitle, pch=20, cex=2)
+View(A)
+plot(A)
+plot(A, col =(km1$cluster +1))
+size(A)
+size(A)[1]
+size(A)[2]
+dim(A)[1]
+myPlotTitle = paste("Original Data Set: K-Means clusters with", myCluster, "clusters","and ",dim(A)[1]*dim(A)[2],"points" )
+plot(A, col =(km1$cluster +1) , main=myPlotTitle, pch=20, cex=2)
+nrow(C)
+myRow = 100000
+myCol = 3
+myMax = 99
+j = 2
+epsilon = 0.1
+myCluster = 2
+A <- replicate(myCol,sample(0:myMax,myRow,rep=TRUE))
+str(A)
+m = j + ceiling(j/epsilon) - 1
+m
+mySVD <- svd(A)
+mySVD
+d <- diag(mySVD$d)
+C <- d %*% t(mySVD$v)
+dim(C)
+startTime <- Sys.time()
+km1 = kmeans(A, myCluster)
+endTime <- Sys.time()
+km1Time <- endTime - startTime
+startTime <- Sys.time()
+km2 = kmeans(C, myCluster)
+endTime <- Sys.time()
+km2Time <- endTime - startTime
+km1Time
+km2Time
+myPlotTitle = paste("Original Data Set: K-Means clusters with", myCluster, "clusters","and ",dim(A)[1]*dim(A)[2],"points" )
+plot(A, col =(km1$cluster +1) , main=myPlotTitle, pch=20, cex=2)
+myPlotTitle = paste("With Coreset: K-Means clusters with", myCluster, "clusters","and ",dim(C)[1]*dim(C)[2],"points" )
+plot(C, col =(km2$cluster +1) , main=myPlotTitle, pch=20, cex=2)
+dim(A)
+startTime <- Sys.time()
+km1 = kmeans(A, myCluster)
+endTime <- Sys.time()
+km1Time <- endTime - startTime
+myPlotTitle = paste("Original Data Set: K-Means clusters with", myCluster, "clusters","and ",dim(A)[1]*dim(A)[2],"points" )
+plot(A, col =(km1$cluster +1) , main=myPlotTitle, pch=20, cex=2)
+myPlotTitle = paste("With Coreset: K-Means clusters with", myCluster, "clusters","and ",dim(C)[1]*dim(C)[2],"points" )
+plot(C, col =(km2$cluster +1) , main=myPlotTitle, pch=20, cex=2)
+shiny::runApp('Google Drive/MDatSc/Principles of Data Science Group Project/Test Folder/shinyApp - Principle Data Science')
+runApp('Google Drive/MDatSc/Principles of Data Science Group Project/Test Folder/shinyApp - Principle Data Science')
+shiny::runApp('Google Drive/MDatSc/Principles of Data Science Group Project/Test Folder/shinyApp - Principle Data Science')
+shiny::runApp('Desktop/R/Shiny Test')
+runApp('Google Drive/MDatSc/Principles of Data Science Group Project/Test Folder/shinyApp - Principle Data Science')
+runApp('Desktop/R/Shiny Test')
+View(fedgovrevtype)
+runApp('Desktop/R/Shiny Test')
+runApp('Desktop/R/Shiny Test')
+?prettyNum
+runApp('Desktop/R/Shiny Test')
+runApp('Desktop/R/Shiny Test')
+runApp('Desktop/R/Shiny Test')
+runApp('Desktop/R/Shiny Test')
+View(fedgovrevtype)
+runApp('Desktop/R/Shiny Test')
+runApp('Desktop/R/Shiny Test')
+runApp('Desktop/R/Shiny Test')
+runApp('Desktop/R/Shiny Test')
+runApp('Desktop/R/Shiny Test')
+runApp('Desktop/R/Shiny Test')
+runApp('Desktop/R/Shiny Test')
+runApp('Desktop/R/Shiny Test')
+runApp('Desktop/R/Shiny Test')
+runApp('Desktop/R/Shiny Test')
+runApp('Desktop/R/Shiny Test')
+runApp('Desktop/R/Shiny Test')
+setwd("~/Google Drive/MDatSc/Principles of Data Science Group Project/Test Folder/shinyApp - Principle Data Science/v3 - added total tables")
+shiny::runApp()

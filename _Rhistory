@@ -1,0 +1,512 @@
+names(FedGovRev19702017DF)
+dim(FedGovRev19702017DF)
+head(FedGovRev19702017DF)
+#initial data frame was Entry, Year 1, Year 2, ..., Year N
+#tidy up the data file so it goes to the right structure, i.e. Entry, Year, Value
+Tidy_FedGovRev19702017DF <- gather(FedGovRev19702017DF, "Year", "Value", 3:49)
+head(Tidy_FedGovRev19702017DF)
+Tidy_FedGovRev19702017DF$Year <- gsub('X','',Tidy_FedGovRev19702017DF$Year)
+Tidy_FedGovRev19702017DF$Value <- gsub('-','0',Tidy_FedGovRev19702017DF$Value)
+Tidy_FedGovRev19702017DF <- transform(Tidy_FedGovRev19702017DF, Year = as.factor(Year))
+Tidy_FedGovRev19702017DF <- transform(Tidy_FedGovRev19702017DF, Value = as.numeric(Value))
+Tidy_FedGovRev19702017DF$Value[is.na(Tidy_FedGovRev19702017DF$Value)] <- 0
+#check data is now in right format
+head(Tidy_FedGovRev19702017DF)
+sapply(Tidy_FedGovRev19702017DF, class)
+#write the tidy data to a csv file
+write.csv(Tidy_FedGovRev19702017DF, "Tidy_FedGovRev.csv", row.names = FALSE)
+#Federal Government Development Expenditure Data
+FedGovDevex19702017DF <- read.csv("Fed Gov Devex 1970-2017.csv")
+head(FedGovDevex19702017DF)
+Tidy_FedGovDevex <- gather(FedGovDevex19702017DF, "Year", "Value", 3:50)
+head(Tidy_FedGovDevex)
+Tidy_FedGovDevex$Year <- gsub('X','',Tidy_FedGovDevex$Year)
+Tidy_FedGovDevex$Value <- gsub('-','0',Tidy_FedGovDevex$Value)
+Tidy_FedGovDevex <- transform(Tidy_FedGovDevex, Year = as.factor(Year))
+Tidy_FedGovDevex <- transform(Tidy_FedGovDevex, Value = as.numeric(Value))
+Tidy_FedGovDevex$Value[is.na(Tidy_FedGovDevex$Value)] <- 0
+#check data is now in right format
+head(Tidy_FedGovDevex)
+sapply(Tidy_FedGovDevex, class)
+#write the tidy data to a csv file
+write.csv(Tidy_FedGovDevex, "Tidy_FedGovDevex.csv", row.names = FALSE)
+#Federal Government Opeerating Expenditure Data
+FedGovOpex19702017DF <- read.csv("Fed Gov Opex 1970-2017.csv")
+head(FedGovOpex19702017DF)
+Tidy_FedGovOpex <- gather(FedGovOpex19702017DF, "Year", "Value", 3:50)
+head(Tidy_FedGovOpex)
+Tidy_FedGovOpex$Year <- gsub('X','',Tidy_FedGovOpex$Year)
+Tidy_FedGovOpex$Value <- gsub('-','0',Tidy_FedGovOpex$Value)
+Tidy_FedGovOpex <- transform(Tidy_FedGovOpex, Year = as.factor(Year))
+Tidy_FedGovOpex <- transform(Tidy_FedGovOpex, Value = as.numeric(Value))
+Tidy_FedGovOpex$Value[is.na(Tidy_FedGovOpex$Value)] <- 0
+#check data is now in right format
+head(Tidy_FedGovOpex)
+sapply(Tidy_FedGovOpex, class)
+#write the tidy data to a csv file
+write.csv(Tidy_FedGovOpex, "Tidy_FedGovOpex.csv", row.names = FALSE)
+View(FedGovDevex19702017DF)
+View(FedGovOpex19702017DF)
+View(FedGovRev19702017DF)
+View(Tidy_FedGovDevex)
+View(Tidy_FedGovOpex)
+View(Tidy_FedGovRev19702017DF)
+runApp()
+View(Tidy_FedGovRev19702017DF)
+testdf <- filter(fedgovrev, Year>=1980, Year<=1990)
+fedgovrev <- read.csv(file="Tidy_FedGovRev.csv", header = TRUE, sep = ",")
+testdf <- filter(fedgovrev, Year>=1980, Year<=1990)
+View(testdf)
+aggregate(Value ~ Year, testdf, sum)
+fedgovrev %>%
+group_by(Type, Year) %>%
+summarise(Value = sum(Value))
+# NOT RUN {
+require(stats) # for lowess, rpois, rnorm
+plot(cars)
+lines(lowess(cars))
+plot(sin, -pi, 2*pi) # see ?plot.function
+## Discrete Distribution Plot:
+plot(table(rpois(100, 5)), type = "h", col = "red", lwd = 10,
+main = "rpois(100, lambda = 5)")
+## Simple quantiles/ECDF, see ecdf() {library(stats)} for a better one:
+plot(x <- sort(rnorm(47)), type = "s", main = "plot(x, type = \"s\")")
+points(x, cex = .5, col = "dark red")
+# }
+plot(sin, -pi, 2*pi)
+plot(x <- sort(rnorm(47)), type = "s", main = "plot(x, type = \"s\")")
+> points(x, cex = .5, col = "dark red")
+plot(x <- sort(rnorm(47)), type = "s", main = "plot(x, type = \"s\")")points(x, cex = .5, col = "dark red")
+plot(x <- sort(rnorm(47)), type = "s", main = "plot(x, type = \"s\")")points(x, cex = .5, col = "dark red")
+plot(x <- sort(rnorm(47)), type = "s", main = "plot(x, type = \"s\")")
+points(x, cex = .5, col = "dark red")
+data <- fedgovrev %>%
+group_by(Type, Year) %>%
+summarise(Value = sum(Value))
+View(data)
+mydata <- fedgovrev %>%
+group_by(Type, Year) %>%
+summarise(Value = sum(Value))
+View(mydata)
+plot(mydata$Year,mydata$Value)
+View(mydata)
+plot(mydata$Year,mydata$Value, type="l")
+plot(mydata$Year,mydata$Value, type="h")
+plot(mydata$Year,mydata$Value, type="l")
+plot(mydata$Year,mydata$Value, type="l", col=mydata$Type)
+plot(mydata$Year,mydata$Value, type="l", col=mydata$Type)
+plot(mydata$Year,mydata$Value, col=mydata$Type)
+plot(mydata$Year,mydata$Value, col=mydata$Type, type="h")
+plot(mydata$Year,mydata$Value, col=mydata$Type, type="l")
+plot(mydata$Year,mydata$Value, col=mydata$Type, type="b")
+plot(mydata$Year,mydata$Value, col=mydata$Type)
+plot(mydata$Year,mydata$Value, col=mydata$Type, xlab="Year", ylab="Value in Mil")
+plot(mydata$Year,mydata$Value, col=mydata$Type, type="h", xlab="Year", ylab="Value in RM Mil")
+plot(mydata$Year,mydata$Value, col=mydata$Type, type="s", xlab="Year", ylab="Value in RM Mil")
+plot(mydata$Year,mydata$Value, col=mydata$Type, type="s", xlab="Year", ylab="Value in RM Mil")
+legend(mydata$Type)
+plot(mydata$Year,mydata$Value, col=mydata$Type, xlab="Year", ylab="Value in RM Mil")
+legend(1,1,mydata$Type)
+plot(mydata$Year,mydata$Value, col=mydata$Type, type="l",xlab="Year", ylab="Value in RM Mil")
+plot(mydata$Year,mydata$Value, col=mydata$Type, type="h",xlab="Year", ylab="Value in RM Mil")
+plot(mydata$Year,mydata$Value, col=mydata$Type,xlab="Year", ylab="Value in RM Mil")
+knitr::opts_chunk$set(echo = TRUE)
+library(caret)
+library(dplyr)
+filename <- "My Crime Stats.csv"
+mycrimedata <- read.csv(filename, header = TRUE)
+knitr::opts_chunk$set(echo = TRUE)
+library(caret)
+library(dplyr)
+library(ggplot2)
+library(lattice)
+filename <- "My Crime Stats.csv"
+mycrimedata <- read.csv(filename, header = TRUE)
+head(mycrimedata,20)
+mycrimedata$NEGERI
+head(mycrimedata,20)
+unique(mycrimedata$NEGERI)
+head(mycrimedata)
+unique(mycrimedata$NEGERI)
+mycrimedata$NEGERI <- gsub('TRNGGANU','TERENGGANU',mycrimedata$NEGERI)
+mycrimedata$NEGERI <- gsub('TERENG- GANU','TERENGGANU',mycrimedata$NEGERI)
+mycrimedata$NEGERI <- gsub('KUALA LUMPUR','KL',mycrimedata$NEGERI)
+mycrimedata$NEGERI <- gsub('NEGERI SEMBILAN','N9',mycrimedata$NEGERI)
+mycrimedata <- mycrimedata[!(mycrimedata$NEGERI=="Jumlah"),]
+mycrimedata$NEGERI <- as.factor(mycrimedata$NEGERI)
+head(mycrimedata)
+unique(mycrimedata$NEGERI)
+mycrimedatasubset <- dplyr::select(mycrimedata,
+NEGERI,
+TAHUN,
+CURI.RAGUT,
+PECAH.RUMAH.DAN.CURI,
+CURI,
+CURI.MOTOKAR,
+CURI.MOTOSIKAL,
+SAMUN.BERKAWAN.TANPA.BERS.API)
+head(mycrimedatasubset,10)
+#Split the data to 70% train & 30% test
+trainindex <- createDataPartition(mycrimedatasubset$NEGERI, p=0.7, list = FALSE)
+trainmycrimedata <- mycrimedatasubset[trainindex,]
+testmycrimedata <- mycrimedatasubset[-trainindex,]
+# split input and output
+x <- trainmycrimedata[,3:8]
+y <- trainmycrimedata[,1]
+# boxplot the crime statistic
+par(mfrow=c(2,3))
+for(i in 1:5) {
+boxplot(x[,i], main=names(x)[i])
+}
+# split input and output
+x <- trainmycrimedata[,3:8]
+y <- trainmycrimedata[,1]
+# boxplot the crime statistic
+par(mfrow=c(2,3))
+for(i in 1:6) {
+boxplot(x[,i], main=names(x)[i])
+}
+# look at scatter plot the crime statistic
+par(mfrow=c(2,3))
+for(i in 1:6) {
+plot(x[,i], main=names(x)[i], col=y)
+}
+par(cex.axis=0.5)
+barplot(height = table(trainmycrimedata$NEGERI))
+par(cex.axis=0.5)
+scatterplot(height = table(trainmycrimedata$NEGERI))
+par(cex.axis=0.5)
+barplot(height = table(trainmycrimedata$NEGERI))
+featurePlot(x=x, y=y, plot="box", col=y)
+# Run algorithms using 5-fold cross validation
+control <- trainControl(method="cv", number=5)
+metric <- "Accuracy"
+#naive bayes
+set.seed(170019)
+fit.nb <- train(NEGERI~., data=trainmycrimedata, method="naive_bayes", metric=metric, trControl=control)
+#kNN
+set.seed(170019)
+fit.knn <- train(NEGERI~., data=trainmycrimedata, method="knn", metric=metric, trControl=control)
+# SVM
+set.seed(170019)
+fit.svm <- train(NEGERI~., data=trainmycrimedata, method="svmRadial", metric=metric, trControl=control)
+#random forest
+set.seed(170019)
+fit.rf <- train(NEGERI~., data=trainmycrimedata, method="rf", metric=metric, trControl=control)
+#summarize accuracy of models
+modelresults <- resamples(list(NB=fit.nb, KNN=fit.knn, SVM=fit.svm, RF=fit.rf))
+dotplot(modelresults)
+#estimate accuracy of Random Forest with the test set
+predictions <- predict(fit.rf, testmycrimedata)
+par(cex.axis=0.5)
+plot(testmycrimedata$NEGERI, main="Test Data")
+plot(predictions, main="Prediction of Test Data")
+confusionMatrix(predictions, testmycrimedata$NEGERI)
+#estimate accuracy of Random Forest with the test set
+predictions <- predict(fit.rf, testmycrimedata)
+par(cex.axis=0.5)
+plot(testmycrimedata$NEGERI, main="Test Data")
+plot(predictions, main="Prediction of Test Data")
+confusionMatrix(predictions, testmycrimedata$NEGERI)
+knitr::opts_chunk$set(echo = TRUE)
+library(caret)
+library(dplyr)
+library(ggplot2)
+library(lattice)
+filename <- "My Crime Stats.csv"
+mycrimedata <- read.csv(filename, header = TRUE)
+head(mycrimedata)
+unique(mycrimedata$NEGERI)
+mycrimedata$NEGERI <- gsub('TRNGGANU','TERENGGANU',mycrimedata$NEGERI)
+mycrimedata$NEGERI <- gsub('TERENG- GANU','TERENGGANU',mycrimedata$NEGERI)
+mycrimedata$NEGERI <- gsub('KUALA LUMPUR','KL',mycrimedata$NEGERI)
+mycrimedata$NEGERI <- gsub('NEGERI SEMBILAN','N9',mycrimedata$NEGERI)
+mycrimedata <- mycrimedata[!(mycrimedata$NEGERI=="Jumlah"),]
+mycrimedata$NEGERI <- as.factor(mycrimedata$NEGERI)
+head(mycrimedata)
+unique(mycrimedata$NEGERI)
+# split to crime and state
+mycrime <- mycrimedata[,3:15]
+mystate <- mycrimedata[,1]
+par(cex.axis=0.1)
+featurePlot(x=mycrime, y=mystate, plot="box", col=mycrimedata$NEGERI)
+mycrimedatasubset <- dplyr::select(mycrimedata,
+NEGERI,
+TAHUN,
+CURI.RAGUT,
+PECAH.RUMAH.DAN.CURI,
+CURI,
+CURI.MOTOKAR,
+CURI.MOTOSIKAL,
+SAMUN.BERKAWAN.TANPA.BERS.API)
+head(mycrimedatasubset,10)
+#Split the data to 70% train & 30% test
+trainindex <- createDataPartition(mycrimedatasubset$NEGERI, p=0.7, list = FALSE)
+trainmycrimedata <- mycrimedatasubset[trainindex,]
+testmycrimedata <- mycrimedatasubset[-trainindex,]
+dim(trainmycrimedata)
+dim(testmycrimedata)
+#check type for each variables
+sapply(trainmycrimedata, class)
+#check the levels or factors in the dataset
+levels(trainmycrimedata$NEGERI)
+head(testmycrimedata)
+# split input and output
+x <- trainmycrimedata[,3:8]
+y <- trainmycrimedata[,1]
+# boxplot the crime statistic
+par(mfrow=c(2,3))
+for(i in 1:6) {
+boxplot(x[,i], main=names(x)[i])
+}
+# look at scatter plot the crime statistic
+par(mfrow=c(2,3))
+for(i in 1:6) {
+plot(x[,i], main=names(x)[i], col=y)
+}
+par(cex.axis=0.5)
+barplot(height = table(trainmycrimedata$NEGERI))
+featurePlot(x=x, y=y, plot="box", col=y)
+# Run algorithms using 5-fold cross validation
+control <- trainControl(method="cv", number=5)
+metric <- "Accuracy"
+#naive bayes
+set.seed(170019)
+fit.nb <- train(NEGERI~., data=trainmycrimedata, method="naive_bayes", metric=metric, trControl=control)
+#kNN
+set.seed(170019)
+fit.knn <- train(NEGERI~., data=trainmycrimedata, method="knn", metric=metric, trControl=control)
+# SVM
+set.seed(170019)
+fit.svm <- train(NEGERI~., data=trainmycrimedata, method="svmRadial", metric=metric, trControl=control)
+#random forest
+set.seed(170019)
+fit.rf <- train(NEGERI~., data=trainmycrimedata, method="rf", metric=metric, trControl=control)
+#summarize accuracy of models
+modelresults <- resamples(list(NB=fit.nb, KNN=fit.knn, SVM=fit.svm, RF=fit.rf))
+dotplot(modelresults)
+#estimate accuracy of Random Forest with the test set
+predictions <- predict(fit.rf, testmycrimedata)
+par(cex.axis=0.5)
+plot(testmycrimedata$NEGERI, main="Test Data")
+plot(predictions, main="Prediction of Test Data")
+confusionMatrix(predictions, testmycrimedata$NEGERI)
+unlink('~/Google Drive/MDatSc/R Programming/Malaysia Crime Stats_cache', recursive = TRUE)
+View(mycrimedata)
+fit.rf
+fit.knn
+fit.nb
+knitr::opts_chunk$set(echo = TRUE)
+library(caret)
+library(dplyr)
+library(ggplot2)
+library(lattice)
+filename <- "My Crime Stats.csv"
+mycrimedata <- read.csv(filename, header = TRUE)
+head(mycrimedata)
+unique(mycrimedata$NEGERI)
+mycrimedata$NEGERI <- gsub('TRNGGANU','TERENGGANU',mycrimedata$NEGERI)
+mycrimedata$NEGERI <- gsub('TERENG- GANU','TERENGGANU',mycrimedata$NEGERI)
+mycrimedata$NEGERI <- gsub('KUALA LUMPUR','KL',mycrimedata$NEGERI)
+mycrimedata$NEGERI <- gsub('NEGERI SEMBILAN','N9',mycrimedata$NEGERI)
+mycrimedata <- mycrimedata[!(mycrimedata$NEGERI=="Jumlah"),]
+mycrimedata$NEGERI <- as.factor(mycrimedata$NEGERI)
+head(mycrimedata)
+unique(mycrimedata$NEGERI)
+# split to crime and state
+mycrime <- mycrimedata[,3:15]
+mystate <- mycrimedata[,1]
+par(cex.axis=0.1)
+featurePlot(x=mycrime, y=mystate, plot="box", col=mycrimedata$NEGERI)
+mycrimedatasubset <- dplyr::select(mycrimedata,
+NEGERI,
+TAHUN,
+CURI.RAGUT,
+PECAH.RUMAH.DAN.CURI,
+CURI,
+CURI.MOTOKAR,
+CURI.MOTOSIKAL,
+SAMUN.BERKAWAN.TANPA.BERS.API)
+head(mycrimedatasubset,10)
+#Split the data to 70% train & 30% test
+trainindex <- createDataPartition(mycrimedatasubset$NEGERI, p=0.7, list = FALSE)
+trainmycrimedata <- mycrimedatasubset[trainindex,]
+testmycrimedata <- mycrimedatasubset[-trainindex,]
+dim(trainmycrimedata)
+dim(testmycrimedata)
+#check type for each variables
+sapply(trainmycrimedata, class)
+#check the levels or factors in the dataset
+levels(trainmycrimedata$NEGERI)
+head(testmycrimedata)
+# split input and output
+x <- trainmycrimedata[,3:8]
+y <- trainmycrimedata[,1]
+# boxplot the crime statistic
+par(mfrow=c(2,3))
+for(i in 1:6) {
+boxplot(x[,i], main=names(x)[i])
+}
+# look at scatter plot the crime statistic
+par(mfrow=c(2,3))
+for(i in 1:6) {
+plot(x[,i], main=names(x)[i], col=y)
+}
+par(cex.axis=0.5)
+barplot(height = table(trainmycrimedata$NEGERI))
+featurePlot(x=x, y=y, plot="box", col=y)
+# Run algorithms using 5-fold cross validation
+control <- trainControl(method="cv", number=5)
+metric <- "Accuracy"
+#naive bayes
+set.seed(170019)
+fit.nb <- train(NEGERI~., data=trainmycrimedata, method="naive_bayes", metric=metric, trControl=control)
+#kNN
+set.seed(170019)
+fit.knn <- train(NEGERI~., data=trainmycrimedata, method="knn", metric=metric, trControl=control)
+# SVM
+set.seed(170019)
+fit.svm <- train(NEGERI~., data=trainmycrimedata, method="svmRadial", metric=metric, trControl=control)
+#random forest
+set.seed(170019)
+fit.rf <- train(NEGERI~., data=trainmycrimedata, method="rf", metric=metric, trControl=control)
+#summarize accuracy of models
+modelresults <- resamples(list(NB=fit.nb, KNN=fit.knn, SVM=fit.svm, RF=fit.rf))
+dotplot(modelresults)
+#estimate accuracy of Random Forest with the test set
+predictions <- predict(fit.rf, testmycrimedata)
+par(cex.axis=0.5)
+plot(testmycrimedata$NEGERI, main="Test Data")
+plot(predictions, main="Prediction of Test Data")
+confusionMatrix(predictions, testmycrimedata$NEGERI)
+unlink('~/Google Drive/MDatSc/R Programming/Malaysia Crime Stats_cache', recursive = TRUE)
+unlink('~/Google Drive/MDatSc/R Programming/Malaysia Crime Stats_cache', recursive = TRUE)
+runApp()
+runApp()
+fedgovrev <- read.csv(file="Tidy_FedGovRev.csv", header = TRUE, sep = ",")
+fedgovdevex <- read.csv(file="Tidy_FedGovRev.csv", header = TRUE, sep = ",")
+fedgovopex <- read.csv(file="Tidy_FedGovRev.csv", header = TRUE, sep = ",")
+mydata <- fedgovrev %>%
+group_by(Type, Year) %>%
+summarise(Value = sum(Value))
+plot(mydata$Year,mydata$Value, col=mydata$Type,xlab="Year", ylab="Value in RM Mil")
+hist(mydata$Year,mydata$Value, col=mydata$Type,xlab="Year", ylab="Value in RM Mil")
+barplot(mydata$Year,mydata$Value, col=mydata$Type,xlab="Year", ylab="Value in RM Mil")
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp('~/Desktop/Data Science')
+runApp('~/Desktop/Data Science')
+runApp('~/Desktop/Data Science')
+runApp('~/Desktop/Data Science')
+runApp('~/Desktop/Data Science')
+runApp('~/Desktop/Data Science')
+runApp('~/Desktop/Data Science')
+runApp('~/Desktop/Data Science')
+runApp('~/Desktop/Data Science')
+runApp('~/Desktop/Data Science')
+runApp('~/Desktop/Data Science')
+runApp('~/Desktop/Data Science')
+runApp('~/Desktop/Data Science')
+runApp('~/Desktop/Data Science')
+runApp('~/Desktop/Data Science')
+runApp('~/Desktop/Data Science')
+runApp('~/Desktop/Data Science')
+runApp('~/Desktop/Data Science')
+View(fedgovdevex)
+View(fedgovopex)
+View(fedgovrev)
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyr)
+#Federal Government Revenue Data
+FedGovRev19702017DF <- read.csv("Fed Gov Revenue 1970-2017.csv")
+#check the data file
+names(FedGovRev19702017DF)
+dim(FedGovRev19702017DF)
+head(FedGovRev19702017DF)
+#initial data frame was Entry, Year 1, Year 2, ..., Year N
+#tidy up the data file so it goes to the right structure, i.e. Entry, Year, Value
+Tidy_FedGovRev19702017DF <- gather(FedGovRev19702017DF, "Year", "Value", 3:49)
+head(Tidy_FedGovRev19702017DF)
+Tidy_FedGovRev19702017DF$Year <- gsub('X','',Tidy_FedGovRev19702017DF$Year)
+Tidy_FedGovRev19702017DF$Value <- gsub('-','0',Tidy_FedGovRev19702017DF$Value)
+Tidy_FedGovRev19702017DF <- transform(Tidy_FedGovRev19702017DF, Year = as.factor(Year))
+Tidy_FedGovRev19702017DF <- transform(Tidy_FedGovRev19702017DF, Value = as.numeric(Value))
+Tidy_FedGovRev19702017DF$Value[is.na(Tidy_FedGovRev19702017DF$Value)] <- 0
+#check data is now in right format
+head(Tidy_FedGovRev19702017DF)
+sapply(Tidy_FedGovRev19702017DF, class)
+#write the tidy data to a csv file
+write.csv(Tidy_FedGovRev19702017DF, "Tidy_FedGovRev.csv", row.names = FALSE)
+#Federal Government Development Expenditure Data
+FedGovDevex19702017DF <- read.csv("Fed Gov Devex 1970-2017.csv")
+head(FedGovDevex19702017DF)
+Tidy_FedGovDevex <- gather(FedGovDevex19702017DF, "Year", "Value", 3:50)
+head(Tidy_FedGovDevex)
+Tidy_FedGovDevex$Year <- gsub('X','',Tidy_FedGovDevex$Year)
+Tidy_FedGovDevex$Value <- gsub('-','0',Tidy_FedGovDevex$Value)
+Tidy_FedGovDevex <- transform(Tidy_FedGovDevex, Year = as.factor(Year))
+Tidy_FedGovDevex <- transform(Tidy_FedGovDevex, Value = as.numeric(Value))
+Tidy_FedGovDevex$Value[is.na(Tidy_FedGovDevex$Value)] <- 0
+#check data is now in right format
+head(Tidy_FedGovDevex)
+sapply(Tidy_FedGovDevex, class)
+#write the tidy data to a csv file
+write.csv(Tidy_FedGovDevex, "Tidy_FedGovDevex.csv", row.names = FALSE)
+#Federal Government Opeerating Expenditure Data
+FedGovOpex19702017DF <- read.csv("Fed Gov Opex 1970-2017.csv")
+head(FedGovOpex19702017DF)
+Tidy_FedGovOpex <- gather(FedGovOpex19702017DF, "Year", "Value", 3:50)
+head(Tidy_FedGovOpex)
+Tidy_FedGovOpex$Year <- gsub('X','',Tidy_FedGovOpex$Year)
+Tidy_FedGovOpex$Value <- gsub('-','0',Tidy_FedGovOpex$Value)
+Tidy_FedGovOpex <- transform(Tidy_FedGovOpex, Year = as.factor(Year))
+Tidy_FedGovOpex <- transform(Tidy_FedGovOpex, Value = as.numeric(Value))
+Tidy_FedGovOpex$Value[is.na(Tidy_FedGovOpex$Value)] <- 0
+#check data is now in right format
+head(Tidy_FedGovOpex)
+sapply(Tidy_FedGovOpex, class)
+#write the tidy data to a csv file
+write.csv(Tidy_FedGovOpex, "Tidy_FedGovOpex.csv", row.names = FALSE)
+View(Tidy_FedGovDevex)
+View(Tidy_FedGovOpex)
+View(Tidy_FedGovDevex)
+View(Tidy_FedGovOpex)
+View(Tidy_FedGovRev19702017DF)
+View(Tidy_FedGovOpex)
+View(Tidy_FedGovDevex)
+View(Tidy_FedGovOpex)
+View(Tidy_FedGovDevex)
+View(Tidy_FedGovOpex)
+View(Tidy_FedGovDevex)
+View(Tidy_FedGovOpex)
+runApp('~/Desktop/Data Science')
+runApp('~/Desktop/Data Science')
+shiny::runApp()
+runApp()
+runApp('~/Desktop/Data Science')
+runApp('~/Desktop/Data Science')
+runApp('~/Desktop/Data Science')
+runApp('~/Desktop/Data Science')
+runApp('~/Desktop/Data Science')
+runApp('~/Desktop/Data Science')

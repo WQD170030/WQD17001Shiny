@@ -1,0 +1,3 @@
+read csv with shiny
+
+https://stackoverflow.com/questions/41428626/r-shiny-read-a-table-from-file-and-use-it

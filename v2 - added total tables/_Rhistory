@@ -1,0 +1,3 @@
+shiny::runApp()
+setwd("~/Google Drive/MDatSc/Principles of Data Science Group Project/Test Folder/shinyApp - Principle Data Science/v2 - added total tables")
+shiny::runApp()
